@@ -8,5 +8,6 @@ Needs Go 1.18 minimum
 
 go mod vendor
 
-go run main.go
+go run main.go <FILE NAME TO SEARCH>
+
 ```

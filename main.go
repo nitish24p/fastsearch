@@ -13,14 +13,24 @@ func main() {
 	if err != nil {
 		fmt.Println("Error getting home directory:", err)
 		return
+
 	}
 	// Pattern / file name to search
-	pattern := "index.js"
-
+	pattern := os.Args[1]
+	fmt.Println(pattern)
 	start := time.Now()
 
+	/**
+	  number of workers is no of go routines to spawn
+	  to process file names
+
+	  In general the algo is
+	  1. Create a read stream of file names
+	  2. Pass these file names to workers, the worker will do string matching
+	  3. Merge all the processed responses in output channel
+	*/
 	const numWorkers = 10
-	maxParsers := 10
+	const maxParsers = 10
 
 	inputStream := pathfinder.CreateDirectoryStream(homeDir, maxParsers)
 
